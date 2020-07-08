@@ -18,10 +18,10 @@ module.exports.loop = function () {
     // run room logic for each room in our empire
     _.forEach(Game.rooms, function(room) {
         if (room && room.controller && room.controller.my) {
+            roomLogic.memory.run(room);
             roomLogic.spawning.run(room);
             roomLogic.job.run(room);
             roomLogic.turrets.run(room);
-            roomLogic.memory.run(room);
         }
     })
     

@@ -26,14 +26,14 @@ var roleWorker = {
         var workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker' && creep.room.name == room.name);
         console.log('Workers: ' + workers.length, room.name);
 
-        if (workers.length < room.memory.census.worker) {
+        if (workers.length < 8) {
             return true;
         }
     },
     // returns an object with the data to spawn a new creep
     spawnData: function(room) {
             let name = 'Worker' + Game.time;
-            let body = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+            let body = [WORK, CARRY, MOVE, MOVE, MOVE];
             let memory = {role: 'worker'};
         
             return {name, body, memory};

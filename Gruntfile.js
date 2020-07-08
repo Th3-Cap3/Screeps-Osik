@@ -26,6 +26,7 @@ module.exports = function (grunt) {
 				cwd:     'dist/',
 				src:     '**',
 				dest:    'C:/Users/adane/AppData/Local/Screeps/scripts/screeps_thelowtech_org___21025/default'
+				//dest:	   'C:/Users/adane/AppData/Local/Screeps/scripts/127_0_0_1___21025/default'
 			},
 		},
 	});

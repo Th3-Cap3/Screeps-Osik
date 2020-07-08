@@ -25,14 +25,14 @@ var roleTechnician = {
         var technicians = _.filter(Game.creeps, (creep) => creep.memory.role == 'technician' && creep.room.name == room.name);
         console.log('Technicians: ' + technicians.length, room.name);
 
-        if (technicians.length < room.memory.census.technician) {
+        if (technicians.length < 2) {
             return true;
         }
     },
     // returns an object with the data to spawn a new creep
     spawnData: function(room) {
             let name = 'Technician' + Game.time;
-            let body = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+            let body = [WORK, CARRY, MOVE, MOVE, MOVE];
             let memory = {role: 'technician'};
         
             return {name, body, memory};

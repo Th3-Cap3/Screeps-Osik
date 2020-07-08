@@ -1,4 +1,4 @@
-let creepRoles = require("../creeps/index");
+let creepRoles = require('../creeps/index');
 let creepTypes = _.keys(creepRoles);
 
 var spawnController = {

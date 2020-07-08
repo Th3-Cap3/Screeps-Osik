@@ -18,8 +18,6 @@ var roleArchitect = {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizingPathStyle: {stroke: '#ffffff'}});
                 }
-            } else if (repTarget.hits < repTarget.hitsMax * this.room.memory.config.wallTargetSize) {
-                creep.maintainWalls();
             } else {
                 creep.patchController();
             }
@@ -33,14 +31,14 @@ var roleArchitect = {
         var architects = _.filter(Game.creeps, (creep) => creep.memory.role == 'architect' && creep.room.name == room.name);
         console.log('Architects: ' + architects.length, room.name);
 
-        if (architects.length < room.memory.census.architect) {
+        if (architects.length < 4) {
             return true;
         }
     },
     // returns an object with the data to spawn a new creep
     spawnData: function(room) {
             let name = 'Architect' + Game.time;
-            let body = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+            let body = [WORK, CARRY, MOVE, MOVE, MOVE];
             let memory = {role: 'architect'};
         
             return {name, body, memory};

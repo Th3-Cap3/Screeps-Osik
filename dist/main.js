@@ -66,10 +66,10 @@ module.exports.loop = function () {
     }
     _.forEach(Game.rooms, function(room) {
         if (room && room.controller && room.controller.my) {
+            roomLogic.memory.run(room);
             roomLogic.spawning.run(room);
             roomLogic.job.run(room);
             roomLogic.turrets.run(room);
-            roomLogic.memory.run(room);
         }
     })
     for(var name in Game.creeps) {
@@ -146,13 +146,13 @@ var roleWorker = {
         var workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker' && creep.room.name == room.name);
         console.log('Workers: ' + workers.length, room.name);
 
-        if (workers.length < room.memory.census.worker) {
+        if (workers.length < 8) {
             return true;
         }
     },
     spawnData: function(room) {
             let name = 'Worker' + Game.time;
-            let body = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+            let body = [WORK, CARRY, MOVE, MOVE, MOVE];
             let memory = {role: 'worker'};
         
             return {name, body, memory};
@@ -190,13 +190,13 @@ var roleTechnician = {
         var technicians = _.filter(Game.creeps, (creep) => creep.memory.role == 'technician' && creep.room.name == room.name);
         console.log('Technicians: ' + technicians.length, room.name);
 
-        if (technicians.length < room.memory.census.technician) {
+        if (technicians.length < 2) {
             return true;
         }
     },
     spawnData: function(room) {
             let name = 'Technician' + Game.time;
-            let body = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+            let body = [WORK, CARRY, MOVE, MOVE, MOVE];
             let memory = {role: 'technician'};
         
             return {name, body, memory};
@@ -229,8 +229,6 @@ var roleArchitect = {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizingPathStyle: {stroke: '#ffffff'}});
                 }
-            } else if (repTarget.hits < repTarget.hitsMax * this.room.memory.config.wallTargetSize) {
-                creep.maintainWalls();
             } else {
                 creep.patchController();
             }
@@ -243,13 +241,13 @@ var roleArchitect = {
         var architects = _.filter(Game.creeps, (creep) => creep.memory.role == 'architect' && creep.room.name == room.name);
         console.log('Architects: ' + architects.length, room.name);
 
-        if (architects.length < room.memory.census.architect) {
+        if (architects.length < 4) {
             return true;
         }
     },
     spawnData: function(room) {
             let name = 'Architect' + Game.time;
-            let body = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+            let body = [WORK, CARRY, MOVE, MOVE, MOVE];
             let memory = {role: 'architect'};
         
             return {name, body, memory};
